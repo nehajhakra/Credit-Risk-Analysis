@@ -6,6 +6,7 @@ Credit risk analysis is crucial for financial institutions to determine whether 
 ✔ SQL – For database creation, queries, and risk categorization.
 ✔ Python (Pandas, Matplotlib, Seaborn) – For data visualization and deeper analysis.
 
+
 🔗 Repository Structure
 📁 data/ – Contains raw datasets (customers.csv, loans.csv, transactions.csv, payments.csv).
 📁 sql_queries/ – SQL scripts for database setup, queries, and insights.
@@ -19,6 +20,7 @@ customers.csv	Customer details (age, gender, income, employment type, credit sco
 loans.csv	Loan details (loan type, amount, interest rate, approval status).
 transactions.csv	Transaction history (amount, type, date).
 payments.csv	Loan payment records (due dates, paid dates, statuses).
+
 🔍 SQL Analysis – Key Insights
 ✅ Total Loan Amount & Average Interest Rate
 ✅ Loan Approval vs. Rejection Trends
@@ -26,19 +28,6 @@ payments.csv	Loan payment records (due dates, paid dates, statuses).
 ✅ Credit Risk Categorization using CASE Statements
 ✅ Top 5 Borrowers (ROW_NUMBER Window Function)
 
-📌 Example Query – Identifying High-Risk Customers:
-
-sql
-Copy
-Edit
-WITH high_risk_customers AS (
-    SELECT c.customer_id, c.name, c.credit_score, COUNT(p.payment_id) AS missed_payments
-    FROM customers c
-    LEFT JOIN payments p ON c.customer_id = p.customer_id AND p.status = 'Missed'
-    GROUP BY c.customer_id, c.name, c.credit_score
-    HAVING c.credit_score < 600 AND COUNT(p.payment_id) > 3
-)
-SELECT * FROM high_risk_customers;
 📊 Python Data Analysis & Visualizations
 📌 Key Findings from Data Analysis:
 📈 Loan approval rates – Comparing different loan types.
@@ -46,28 +35,6 @@ SELECT * FROM high_risk_customers;
 💰 Transaction trends – High-value vs. low-value transactions.
 📊 Loan repayment trends – Who repays on time vs. who defaults?
 
-🔹 Loan Type Distribution:
-
-python
-Copy
-Edit
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-sns.countplot(x="loan_type", data=loans, palette="viridis")  
-plt.title("Loan Type Count")  
-plt.xticks(rotation=45)  
-plt.show()
-🔹 Customer Age Distribution:
-
-python
-Copy
-Edit
-plt.hist(customers["age"], bins=10, color="lightcoral", edgecolor="black")  
-plt.title("Age Distribution of Customers")  
-plt.xlabel("Age")  
-plt.ylabel("Count")  
-plt.show()
 🛠️ How to Run the Project
 1️⃣ Clone the Repository
 
@@ -88,6 +55,8 @@ bash
 Copy
 Edit
 python credit_risk_analysis.py
+
+
 🎯 Future Improvements
 ✔ Feature Engineering for Better Risk Prediction
 ✔ Machine Learning Model for Loan Default Prediction
